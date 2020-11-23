@@ -58,6 +58,7 @@ public final class LambdaUtilities {
      *         otherwise.
      */
     public static <T> List<Optional<T>> optFilter(final List<T> list, final Predicate<T> pre) {
+        List<Optional<T>>
         /*
          * Suggestion: consider Optional.filter
          */
@@ -80,7 +81,8 @@ public final class LambdaUtilities {
         /*
          * Suggestion: consider Map.merge
          */
-        return null;
+        
+        
     }
 
     /**
