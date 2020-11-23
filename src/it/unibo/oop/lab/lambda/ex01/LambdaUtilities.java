@@ -19,6 +19,7 @@ import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 import sun.awt.www.content.audio.x_aiff;
+import sun.tools.tree.NewArrayExpression;
 
 
 /**
@@ -88,7 +89,10 @@ public final class LambdaUtilities {
     public static <R, T> Map<R, Set<T>> group(final List<T> list, final Function<T, R> op) {
         Map<R, Set<T>> map = new HashMap<>();
 
-        list.stream().forEach(i -> map.merge(op.apply(i), Set.of(i), (x,y) -> map.put(op.apply(i),3) ));
+        list.stream().forEach(i -> map.merge(op.apply(i), new HashSet<T>(Arrays.asList(i)), (x,y) -> { 
+            x.addAll(y);
+            return x;
+        }));
         
         return map;
         /*
