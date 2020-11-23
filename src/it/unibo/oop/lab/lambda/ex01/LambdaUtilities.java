@@ -1,7 +1,11 @@
 package it.unibo.oop.lab.lambda.ex01;
 
+import java.time.Year;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -12,6 +16,10 @@ import java.util.function.Supplier;
 import java.util.function.UnaryOperator;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import java.util.stream.Stream;
+
+import sun.awt.www.content.audio.x_aiff;
+
 
 /**
  * This class will contain four utility functions on lists and maps, of which the first one is provided as example.
@@ -78,11 +86,14 @@ public final class LambdaUtilities {
      *         based on the mapping done by the function
      */
     public static <R, T> Map<R, Set<T>> group(final List<T> list, final Function<T, R> op) {
+        Map<R, Set<T>> map = new HashMap<>();
+
+        list.stream().forEach(i -> map.merge(op.apply(i), Set.of(i), (x,y) -> map.put(op.apply(i),3) ));
+        
+        return map;
         /*
          * Suggestion: consider Map.merge
          */
-        
-        
     }
 
     /**
@@ -119,19 +130,19 @@ public final class LambdaUtilities {
         System.out.println(group(li, x -> x % 2 == 0 ? "even" : "odd"));
         /*
          * {odd=[1, 3, 5, 7], even=[2, 4, 6]}
-         */
+         *
         final List<Optional<Integer>> opt = optFilter(li, x -> x % 3 == 0);
         System.out.println(opt);
         /*
          * [Optional.empty, Optional.empty, Optional[3], Optional.empty,
          * Optional.empty, Optional[6], Optional.empty]
-         */
+         *
         final Map<Integer, Optional<Integer>> map = new HashMap<>();
         for (int i = 0; i < opt.size(); i++) {
             map.put(i, opt.get(i));
         }
         System.out.println(fill(map, () -> (int) (-Math.random() * 10)));
-        /*
+        *
          * {0=-2, 1=-7, 2=3, 3=-3, 4=-7, 5=6, 6=-3}
          */
     }
