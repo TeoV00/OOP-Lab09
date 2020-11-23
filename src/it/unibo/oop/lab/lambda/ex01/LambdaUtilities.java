@@ -18,9 +18,6 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
-import sun.awt.www.content.audio.x_aiff;
-import sun.tools.tree.NewArrayExpression;
-
 
 /**
  * This class will contain four utility functions on lists and maps, of which the first one is provided as example.
@@ -95,9 +92,6 @@ public final class LambdaUtilities {
         }));
         
         return map;
-        /*
-         * Suggestion: consider Map.merge
-         */
     }
 
     /**
