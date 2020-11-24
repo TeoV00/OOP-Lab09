@@ -47,11 +47,8 @@ public final class MusicGroupImpl implements MusicGroup {
 
     @Override
     public Stream<String> albumInYear(final int year) {
-        final List<String> albumList = new ArrayList<>();
-        this.albums.keySet().stream()
-                            .filter(nameAlbum -> this.albums.get(nameAlbum) == year)
-                            .forEach(matchAlbum -> albumList.add(matchAlbum));
-        return albumList.stream();
+        return this.albums.keySet().stream()
+                                   .filter(nameAlbum -> this.albums.get(nameAlbum) == year);
     }
 
     @Override
