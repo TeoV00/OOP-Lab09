@@ -41,13 +41,17 @@ public final class MusicGroupImpl implements MusicGroup {
     @Override
     public Stream<String> albumNames() {
         final List<String> albumListname = new ArrayList<>();
-        this.albums.forEach((name, num) -> albumListname.add(name));
+        this.albums.forEach((name, year) -> albumListname.add(name));
         return albumListname.stream();
     }
 
     @Override
     public Stream<String> albumInYear(final int year) {
-        return null;
+        final List<String> albumList = new ArrayList<>();
+        this.albums.keySet().stream()
+                            .filter(nameAlbum -> this.albums.get(nameAlbum) == year)
+                            .forEach(matchAlbum -> albumList.add(matchAlbum));
+        return albumList.stream();
     }
 
     @Override
