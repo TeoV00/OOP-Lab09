@@ -1,7 +1,9 @@
 package it.unibo.oop.lab.lambda.ex02;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.OptionalDouble;
@@ -31,7 +33,9 @@ public final class MusicGroupImpl implements MusicGroup {
 
     @Override
     public Stream<String> orderedSongNames() {
-        return null;
+        final List<String> songNameList = new ArrayList<>();
+        this.songs.forEach(s -> songNameList.add(s.getSongName()));
+        return songNameList.stream().sorted();
     }
 
     @Override
