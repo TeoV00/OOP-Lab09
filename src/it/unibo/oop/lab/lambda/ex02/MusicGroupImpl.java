@@ -53,17 +53,24 @@ public final class MusicGroupImpl implements MusicGroup {
 
     @Override
     public int countSongs(final String albumName) {
-        return -1;
+        return (int) this.songs.stream()
+                               .filter(song -> song.albumName.equals(Optional.of(albumName)))
+                               .count();
     }
 
     @Override
     public int countSongsInNoAlbum() {
-        return -1;
+        return (int) this.songs.stream()
+                               .filter(song -> song.albumName.isEmpty())
+                               .count();
     }
 
     @Override
     public OptionalDouble averageDurationOfSongs(final String albumName) {
-        return null;
+        return this.songs.stream()
+                         .filter(song -> song.albumName.equals(albumName))
+                         .map(song -> OptionalDouble.of(song.duration))
+                         .reduce((a, b) -> a + b);
     }
 
     @Override
