@@ -40,7 +40,9 @@ public final class MusicGroupImpl implements MusicGroup {
 
     @Override
     public Stream<String> albumNames() {
-        return null;
+        final List<String> albumListname = new ArrayList<>();
+        this.albums.forEach((name, num) -> albumListname.add(name));
+        return albumListname.stream();
     }
 
     @Override
