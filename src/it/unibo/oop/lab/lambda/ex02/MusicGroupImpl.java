@@ -8,6 +8,8 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.OptionalDouble;
 import java.util.Set;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /**
@@ -75,7 +77,9 @@ public final class MusicGroupImpl implements MusicGroup {
 
     @Override
     public Optional<String> longestSong() {
-        return null;
+        return this.songs.stream()
+                         .collect(Collectors.maxBy((a, b) -> Double.compare(a.getDuration(), b.getDuration())))
+                         .map(song -> song.getSongName());
     }
 
     @Override
