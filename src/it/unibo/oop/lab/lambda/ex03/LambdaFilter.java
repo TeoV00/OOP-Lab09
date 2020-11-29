@@ -36,9 +36,9 @@ public final class LambdaFilter extends JFrame {
 
     private enum Command {
         IDENTITY("No modifications", Function.identity()),
-        TO_LOWER_CASE("Lower case", string -> string.toLowerCase()),
+        TO_LOWER_CASE("Lower case", String::toLowerCase),
         COUNT_CHAR("Count char", string -> Integer.toString(string.length())),
-        COUNT_LINES("Count lines", string -> Integer.toString(string.chars().filter(c -> c == '\n').count()));
+        COUNT_LINES("Count lines", string -> Long.toString(string.chars().filter(c -> c == '\n').count() + 1));
 
         private final String commandName;
         private final Function<String, String> fun;
