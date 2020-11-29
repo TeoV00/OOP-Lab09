@@ -42,7 +42,9 @@ public final class LambdaFilter extends JFrame {
         TO_LOWER_CASE("Lower case", String::toLowerCase),
         COUNT_CHAR("Count char", string -> Integer.toString(string.length())),
         COUNT_LINES("Count lines", string -> Long.toString(string.chars().filter(c -> c == '\n').count() + 1)),
-        LIST_WORDS("List words A-Z", string -> string.replace(' ', '\n').lines().sorted().collect(Collectors.joining()));
+        LIST_WORDS("List words A-Z", string -> string.replace(' ', '\n').lines()
+                                                                        .sorted()
+                                                                        .collect(Collectors.joining("\n")));
 
         private final String commandName;
         private final Function<String, String> fun;
