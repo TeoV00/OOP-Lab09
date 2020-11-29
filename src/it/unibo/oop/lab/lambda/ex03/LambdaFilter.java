@@ -30,8 +30,7 @@ import java.util.stream.Collectors;
  * 4) List all the words in alphabetical order
  * 
  * 5) Write the count for each word, e.g. "word word pippo" should output "pippo -> 1 word -> 2"
- *a d b h tr w a z gf h tttt dddf  mm 
- *fdfd iiu bb
+ *
  */
 public final class LambdaFilter extends JFrame {
 
@@ -42,6 +41,9 @@ public final class LambdaFilter extends JFrame {
         TO_LOWER_CASE("Lower case", String::toLowerCase),
         COUNT_CHAR("Count char", string -> Integer.toString(string.length())),
         COUNT_LINES("Count lines", string -> Long.toString(string.chars().filter(c -> c == '\n').count() + 1)),
+        /*
+         * Alphabetical order without using regex
+         * */
         LIST_WORDS("List words A-Z", string -> string.replace(' ', '\n').lines()
                                                                         .sorted()
                                                                         .collect(Collectors.joining("\n")));
