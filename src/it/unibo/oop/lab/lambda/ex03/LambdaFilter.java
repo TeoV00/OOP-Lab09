@@ -46,7 +46,12 @@ public final class LambdaFilter extends JFrame {
          * */
         LIST_WORDS("List words A-Z", string -> string.replace(' ', '\n').lines()
                                                                         .sorted()
-                                                                        .collect(Collectors.joining("\n")));
+                                                                        .collect(Collectors.joining("\n"))),
+        STAT_WORD("Words count", string -> string.replace(' ', '\n').lines()
+                                                                    .collect(Collectors.groupingBy(Function.identity(), Collectors.counting())
+                                                                     
+                                                                    .stream()
+                                                                    .map()));
 
         private final String commandName;
         private final Function<String, String> fun;
