@@ -15,6 +15,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
+import java.util.stream.Collectors;
+
 /**
  * Modify this small program adding new filters.
  * Realize this exercise using as much as possible the Stream library.
@@ -28,7 +30,8 @@ import javax.swing.JTextArea;
  * 4) List all the words in alphabetical order
  * 
  * 5) Write the count for each word, e.g. "word word pippo" should output "pippo -> 1 word -> 2"
- *
+ *a d b h tr w a z gf h tttt dddf  mm 
+ *fdfd iiu bb
  */
 public final class LambdaFilter extends JFrame {
 
@@ -38,7 +41,8 @@ public final class LambdaFilter extends JFrame {
         IDENTITY("No modifications", Function.identity()),
         TO_LOWER_CASE("Lower case", String::toLowerCase),
         COUNT_CHAR("Count char", string -> Integer.toString(string.length())),
-        COUNT_LINES("Count lines", string -> Long.toString(string.chars().filter(c -> c == '\n').count() + 1));
+        COUNT_LINES("Count lines", string -> Long.toString(string.chars().filter(c -> c == '\n').count() + 1)),
+        LIST_WORDS("List words A-Z", string -> string.replace(' ', '\n').lines().sorted().collect(Collectors.joining()));
 
         private final String commandName;
         private final Function<String, String> fun;
