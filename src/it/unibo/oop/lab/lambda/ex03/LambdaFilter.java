@@ -16,6 +16,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
 import java.util.stream.Collectors;
+import java.util.Arrays;
 
 /**
  * Modify this small program adding new filters.
@@ -47,11 +48,13 @@ public final class LambdaFilter extends JFrame {
         LIST_WORDS("List words A-Z", string -> string.replace(' ', '\n').lines()
                                                                         .sorted()
                                                                         .collect(Collectors.joining("\n"))),
-        STAT_WORD("Words count", string -> string.replace(' ', '\n').lines()
-                                                                    .collect(Collectors.groupingBy(Function.identity(), Collectors.counting())
-                                                                     
-                                                                    .stream()
-                                                                    .map()));
+      //split() return the array of strings computed by splitting this string around matches of the given regular expression
+        WORDCOUNT("Count words", s -> Arrays.stream(s.split(" ")) 
+                                            .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()))
+                                            .entrySet().stream()
+                                            .map(e -> e.getKey() + " -> " + e.getValue())
+                                            .collect(Collectors.joining("\n"))
+                );
 
         private final String commandName;
         private final Function<String, String> fun;
