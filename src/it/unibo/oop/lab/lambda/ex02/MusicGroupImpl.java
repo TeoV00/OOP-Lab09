@@ -1,10 +1,12 @@
 package it.unibo.oop.lab.lambda.ex02;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Optional;
 import java.util.OptionalDouble;
 import java.util.Set;
@@ -83,11 +85,17 @@ public final class MusicGroupImpl implements MusicGroup {
 
     @Override
     public Optional<String> longestAlbum() {
-        this.albums.keySet().stream()
-                             .filter(albumName -> this.songs.stream()
-                                               .allMatch(song -> song.albumName.equals(Optional.ofNullable(albumName))))
-                             .map(elem -> this.albums.get(elem).toString());
-        return null;
+        
+        
+        return this.songs.stream().filter(a -> a.getAlbumName().isPresent())  //passano solo le songs con un album associato
+                //collect: raggruppo le canzoni per [(key)AlbumName- (value)somma durata canzoni album]
+                .collect(Collectors.groupingBy(Song::getAlbumName, Collectors.summingDouble(Song::getDuration)))
+                //entrySet: di questa map prendo le coppie key-value (album-durata tot.)
+                .entrySet().stream()
+                //collect: restituisce l'entrySet (coppia album-durata) con durata maggiore, getValue --> durata album
+                .collect(Collectors.maxBy(Comparator.comparingDouble(Entry::getValue)))
+                //flatMap: piattella/modifica la mappa con Entry.getKey() --> ottengo una mappa con solo le key (sarà solo una)
+                .flatMap(Entry::getKey);
     }
 
     private static final class Song {
