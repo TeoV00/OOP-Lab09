@@ -83,12 +83,10 @@ public final class MusicGroupImpl implements MusicGroup {
 
     @Override
     public Optional<String> longestAlbum() {
-        System.out.println(" " +
         this.albums.keySet().stream()
                              .filter(albumName -> this.songs.stream()
-                                                            .allMatch(song -> song.albumName.equals(Optional.ofNullable(albumName))))
-                             .map(elem -> this.albums.get(elem).toString())
-        );
+                                               .allMatch(song -> song.albumName.equals(Optional.ofNullable(albumName))))
+                             .map(elem -> this.albums.get(elem).toString());
         return null;
     }
 
